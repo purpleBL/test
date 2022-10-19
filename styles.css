@@ -3,6 +3,7 @@
 }
 body {
   padding: 20px;
+  overflow: hidden;
 }
 
 .items-block {
