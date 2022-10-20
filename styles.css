@@ -3,7 +3,35 @@
 }
 body {
   padding: 20px;
-  overflow: hidden;
+}
+
+.box {
+  height: 100%;
+  /* border: 2px solid; */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box:hover {
+  cursor: pointer;
+}
+.box:hover .main-stop {
+  stop-color: #252525;
+}
+.box:hover .alt-stop {
+  stop-color: #4f4f4f;
+}
+
+.box__text {
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .05em;
 }
 
 .items-block {
