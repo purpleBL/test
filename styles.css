@@ -9,6 +9,9 @@ body {
   height: 100%;
   display: flex;
   justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 
 a.box__btn {
@@ -30,7 +33,11 @@ a.box__btn:hover {
 }
 
 a.box__btn:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
+  -webkit-transform: scale(0.97);
+  -moz-transform: scale(0.97);
+  -ms-transform: scale(0.97);
+  -o-transform: scale(0.97);
 }
 
 
