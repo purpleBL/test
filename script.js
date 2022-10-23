@@ -17,4 +17,4 @@ for (let e of document.querySelectorAll(
 
 
 
-document.addEventListener("touchstart", function() {}, true);
+// document.addEventListener("touchstart", function() {}, true);
