@@ -22,8 +22,12 @@ body {
   stop-color: #4633c1;
 
 }
-.box:hover:active {
+.box:active {
   transform: scale(.95);
+  -webkit-transform: scale(.95);
+  -moz-transform: scale(.95);
+  -ms-transform: scale(.95);
+  -o-transform: scale(.95);
 }
 
 .box__text {
