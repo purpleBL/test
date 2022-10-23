@@ -3,8 +3,10 @@
 }
 body {
   padding: 20px;
-
+  overflow: hidden;
 }
+
+
 
 .box {
   height: 100%;
@@ -63,3 +65,9 @@ a.box__btn:active {
   text-align: center;
 }
 
+#app {
+  -webkit-overflow-scrolling: touch;
+  height: 100vh;
+  height: -webkit-fill-available;
+  overflow: auto;
+}
