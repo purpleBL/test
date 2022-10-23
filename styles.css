@@ -7,7 +7,6 @@ body {
 
 .box {
   height: 100%;
-  /* border: 2px solid; */
   display: inline-flex;
   align-items: center;
   justify-content: center;
