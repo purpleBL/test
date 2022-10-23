@@ -20,14 +20,23 @@ body {
 }
 .box:hover .alt-stop {
   stop-color: #4633c1;
-
 }
+
 .box:active {
-  transform: scale(.95);
-  -webkit-transform: scale(.95);
-  -moz-transform: scale(.95);
-  -ms-transform: scale(.95);
-  -o-transform: scale(.95);
+  transform: scale(.97);
+  -webkit-transform: scale(.97);
+  -moz-transform: scale(.97);
+  -ms-transform: scale(.97);
+  -o-transform: scale(.97);
+}
+
+@media screen and (max-width: 600px) {
+  .box:hover .main-stop {
+    stop-color: #1E2CEF;
+  }
+  .box:hover .alt-stop {
+    stop-color: #4E5CFF;
+  }
 }
 
 .box__text {
@@ -103,3 +112,4 @@ a:hover {
   cursor: pointer;
   width: 50%;
 }
+
