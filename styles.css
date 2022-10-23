@@ -17,10 +17,14 @@ body {
   cursor: pointer;
 }
 .box:hover .main-stop {
-  stop-color: #252525;
+  stop-color: #1932aa;
 }
 .box:hover .alt-stop {
-  stop-color: #4f4f4f;
+  stop-color: #4633c1;
+
+}
+.box:hover:active {
+  transform: scale(.95);
 }
 
 .box__text {
