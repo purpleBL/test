@@ -22,7 +22,7 @@ body {
   stop-color: #4633c1;
 
 }
-.box:hover:active {
+.box:active {
   transform: scale(.95);
 }
 
