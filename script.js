@@ -6,6 +6,8 @@ slider.oninput = function () {
   output.innerHTML = this.value;
 };
 
+
+
 for (let e of document.querySelectorAll(
   'input[type="range"].slider-progress'
 )) {
