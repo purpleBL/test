@@ -44,23 +44,21 @@ a.box__btn:active {
   -o-transform: translateY(2px);
 }
 
-
-
-.items-block {
-  display: flex;
-  gap: 10px;
+.slider-box {
+  display: inline-flex;
+  justify-content: center;
 }
 
 .slidecontainer {
-  display: flex;
-  flex-direction: column-reverse;
+  display: inline-flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: 20px;
-  margin: 50px 0 50px 0;
+  width: 100%;
 }
 
 .value {
   display: inline;
+  padding: 20px;
   font-size: 40px;
   font-weight: 700;
   text-align: center;

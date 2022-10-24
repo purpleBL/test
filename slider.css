@@ -1,5 +1,6 @@
 input[type="range"].styled-slider {
-  width: 75vw;
+  width: 50vw;
+  
   -webkit-appearance: none;
 }
 
@@ -52,6 +53,14 @@ input[type="range"].styled-slider::-webkit-slider-runnable-track:hover {
   -ms-border-radius: 1em;
   -o-border-radius: 1em;
 }
+input[type="range"].styled-slider::-webkit-slider-runnable-track:active {
+  height: 2em;
+  border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
+}
 
 input[type="range"].styled-slider.slider-progress::-webkit-slider-runnable-track {
   background: linear-gradient(to right, #0c7be9, #0c7be9) 0 / var(--sx) 100%
@@ -59,14 +68,14 @@ input[type="range"].styled-slider.slider-progress::-webkit-slider-runnable-track
     rgb(229, 231, 243);
 }
 
-input[type="range"].styled-slider.slider-progress:hover::-webkit-slider-runnable-track {
+/* input[type="range"].styled-slider.slider-progress:hover::-webkit-slider-runnable-track {
   background: linear-gradient(to right, #0061c3, #0061c3) 0 / var(--sx) 100%
       no-repeat,
     #d9dbe9;
-}
+} */
 
 input[type="range"].styled-slider.slider-progress:active::-webkit-slider-runnable-track {
-  background: linear-gradient(to right, #0061c3, #0061c3) 0 / var(--sx) 100%
+  background: linear-gradient(to right, #0c7be9, #0c7be9) 0 / var(--sx) 100%
       no-repeat,
-    #d9dbe9;
+    rgb(229, 231, 243);
 }
