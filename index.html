@@ -3,39 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Простой Магазин</title>
+    <title>NeonShop | Future Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>MyShop</h1>
-            <div class="cart-info">
-                Корзина: <span id="cart-count">0</span> шт. | 
-                Сумма: <span id="cart-total">0</span> ₽
-                <button id="cart-btn">Оформить</button>
-            </div>
+
+    <!-- Навигация -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <div class="logo">Neon<span>Shop</span></div>
+            <button class="cart-trigger" id="openCart">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span class="badge" id="cartCount">0</span>
+            </button>
         </div>
+    </nav>
+
+    <!-- Главный экран -->
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>Технологии <br><span class="text-gradient">Завтрашнего Дня</span></h1>
+            <p>Премиальные гаджеты с доставкой за 24 часа.</p>
+            <a href="#catalog" class="btn-primary">В каталог</a>
+        </div>
+        <div class="glow-bg"></div>
     </header>
 
-    <main class="container">
-        <h2>Наши товары</h2>
-        <div id="products-grid" class="products-grid">
-            <!-- Товары будут добавлены через JS -->
+    <!-- Каталог -->
+    <section class="catalog" id="catalog">
+        <div class="container">
+            <h2 class="section-title">Популярное</h2>
+            <div class="grid" id="productGrid"></div>
         </div>
-    </main>
+    </section>
 
-    <!-- Модальное окно корзины -->
-    <div id="cart-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Корзина</h2>
-            <div class="cart-items">
-                <!-- Элементы корзины -->
+    <!-- Корзина (Modal) -->
+    <div class="modal-backdrop" id="cartModal">
+        <div class="modal-panel">
+            <div class="modal-header">
+                <h3>Ваша корзина</h3>
+                <button class="close-btn" id="closeCart">&times;</button>
             </div>
-            <p><strong>Итого: <span id="cart-modal-total">0</span> ₽</strong></p>
-            <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+            <div class="modal-body" id="cartItems">
+                <div class="empty-state">Корзина пуста 😔</div>
+            </div>
+            <div class="modal-footer">
+                <div class="summary">
+                    <span>Итого:</span>
+                    <span class="price-tag" id="cartTotal">0 ₽</span>
+                </div>
+                <button class="btn-checkout" id="checkoutBtn">Оформить заказ</button>
+            </div>
         </div>
+    </div>
+
+    <!-- Уведомление -->
+    <div class="toast" id="toast">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span id="toastMsg">Добавлено в корзину</span>
     </div>
 
     <script src="script.js"></script>
