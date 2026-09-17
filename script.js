@@ -1,188 +1,177 @@
-// Данные товаров
 const products = [
-    {
-        id: 1,
-        name: "NeonPhone X",
-        price: 79990,
-        description: "Флагманский смартфон с AI-камерой",
-        emoji: "📱"
-    },
-    {
-        id: 2,
-        name: "ProBook Air",
-        price: 129990,
-        description: "Ультратонкий ноутбук для профессионалов",
-        emoji: "💻"
-    },
-    {
-        id: 3,
-        name: "SoundBuds Pro",
-        price: 24990,
-        description: "Наушники с активным шумоподавлением",
-        emoji: "🎧"
-    },
-    {
-        id: 4,
-        name: "SmartWatch Ultra",
-        price: 54990,
-        description: "Часы с мониторингом здоровья 24/7",
-        emoji: "⌚"
-    },
-    {
-        id: 5,
-        name: "Vision VR Headset",
-        price: 89990,
-        description: "Погружение в виртуальную реальность",
-        emoji: "🥽"
-    },
-    {
-        id: 6,
-        name: "GamePad Elite",
-        price: 12990,
-        description: "Контроллер для киберспорта",
-        emoji: "🎮"
-    }
+  {
+    id: 1,
+    name: "Neon Headphones",
+    price: 299,
+    emoji: "🎧",
+    desc: "Беспроводные наушники с шумоподавлением и 40ч работы.",
+    specs: ["Bluetooth 5.2", "ANC Active", "USB-C"],
+  },
+  {
+    id: 2,
+    name: "Cyber Watch",
+    price: 199,
+    emoji: "⌚",
+    desc: "Умные часы с мониторингом здоровья и AMOLED экраном.",
+    specs: ["Waterproof 5ATM", "GPS", "Heart Rate"],
+  },
+  {
+    id: 3,
+    name: "Pro Lens",
+    price: 899,
+    emoji: "📷",
+    desc: "Профессиональный объектив для зеркальных камер.",
+    specs: ["50mm f/1.8", "Auto Focus", "Glass Element"],
+  },
+  {
+    id: 4,
+    name: "Mech Keyboard",
+    price: 149,
+    emoji: "⌨️",
+    desc: "Механическая клавиатура с RGB подсветкой.",
+    specs: ["Cherry MX Blue", "RGB", "Aluminum Body"],
+  },
+  {
+    id: 5,
+    name: "VR Glass",
+    price: 499,
+    emoji: "🥽",
+    desc: "Очки виртуальной реальности нового поколения.",
+    specs: ["4K per eye", "120Hz", "Wireless"],
+  },
+  {
+    id: 6,
+    name: "Smart Home",
+    price: 129,
+    emoji: "🏠",
+    desc: "Центр управления умным домом с голосовым помощником.",
+    specs: ["Wi-Fi 6", "Zigbee", "Voice Control"],
+  },
 ];
 
+const grid = document.getElementById("productsGrid");
+const cartBtn = document.getElementById("cartBtn");
+const cartSidebar = document.getElementById("cartSidebar");
+const closeCart = document.querySelector(".close-cart");
+const overlay = document.getElementById("overlay");
+const cartItemsContainer = document.getElementById("cartItems");
+const cartTotalEl = document.getElementById("cartTotal");
+const cartCountEl = document.getElementById("cartCount");
+
+// Modal Elements
+const modal = document.getElementById("productModal");
+const closeModal = document.querySelector(".close-modal");
+const modalImg = document.getElementById("modalImg");
+const modalTitle = document.getElementById("modalTitle");
+const modalPrice = document.getElementById("modalPrice");
+const modalDesc = document.getElementById("modalDesc");
+const modalSpecs = document.getElementById("modalSpecs");
+const modalAddBtn = document.getElementById("modalAddBtn");
+
 let cart = [];
+let currentProduct = null;
 
-// DOM элементы
-const productGrid = document.getElementById('productGrid');
-const cartCount = document.getElementById('cartCount');
-const cartTotal = document.getElementById('cartTotal');
-const cartItemsContainer = document.getElementById('cartItems');
-const openCartBtn = document.getElementById('openCart');
-const closeCartBtn = document.getElementById('closeCart');
-const cartModal = document.getElementById('cartModal');
-const checkoutBtn = document.getElementById('checkoutBtn');
-const toast = document.getElementById('toast');
-const toastMsg = document.getElementById('toastMsg');
+// Render Products
+products.forEach((product) => {
+  const card = document.createElement("div");
+  card.className = "product-card";
+  card.innerHTML = `
+        <div class="card-img">${product.emoji}</div>
+        <div class="card-info">
+            <div class="card-title">${product.name}</div>
+            <div class="card-price">$${product.price}</div>
+        </div>
+    `;
+  card.addEventListener("click", () => openModal(product));
+  grid.appendChild(card);
+});
 
-// Инициализация
-function init() {
-    renderProducts();
-    updateCart();
-    setupEventListeners();
+// Modal Logic
+function openModal(product) {
+  currentProduct = product;
+  modalTitle.textContent = product.name;
+  modalPrice.textContent = `$${product.price}`;
+  modalDesc.textContent = product.desc;
+  modalImg.textContent = product.emoji; // Using emoji as image for demo
+  modalImg.style.fontSize = "8rem";
+
+  modalSpecs.innerHTML = product.specs
+    .map((spec) => `<li>${spec}</li>`)
+    .join("");
+
+  modal.classList.add("active");
+  overlay.classList.add("active");
 }
 
-// Рендеринг товаров
-function renderProducts() {
-    productGrid.innerHTML = '';
-    products.forEach((product, index) => {
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.style.animationDelay = `${index * 0.1}s`;
-        card.innerHTML = `
-            <div class="product-image">${product.emoji}</div>
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-                <div class="product-footer">
-                    <span class="price">${formatPrice(product.price)}</span>
-                    <button class="btn-add" onclick="addToCart(${product.id})">В корзину</button>
-                </div>
-            </div>
-        `;
-        productGrid.appendChild(card);
-    });
+function closeModalFunc() {
+  modal.classList.remove("active");
+  overlay.classList.remove("active");
 }
 
-// Форматирование цены
-function formatPrice(price) {
-    return new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
+closeModal.addEventListener("click", closeModalFunc);
+overlay.addEventListener("click", () => {
+  closeModalFunc();
+  cartSidebar.classList.remove("active");
+  overlay.classList.remove("active");
+});
+
+// Cart Logic
+modalAddBtn.addEventListener("click", () => {
+  if (currentProduct) {
+    addToCart(currentProduct);
+    closeModalFunc();
+    openCart();
+  }
+});
+
+function addToCart(product) {
+  cart.push(product);
+  updateCart();
 }
 
-// Добавление в корзину
-window.addToCart = function(id) {
-    const product = products.find(p => p.id === id);
-    const existingItem = cart.find(item => item.id === id);
-    
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        cart.push({ ...product, quantity: 1 });
-    }
-    
-    updateCart();
-    showToast(`"${product.name}" добавлен`);
-};
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  updateCart();
+}
 
-// Удаление из корзины
-window.removeFromCart = function(id) {
-    cart = cart.filter(item => item.id !== id);
-    updateCart();
-};
-
-// Обновление корзины
 function updateCart() {
-    const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
-    cartCount.textContent = totalCount;
-    cartTotal.textContent = formatPrice(totalPrice);
-    
-    if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<div class="empty-state">Корзина пуста 😔</div>';
-    } else {
-        cartItemsContainer.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <div style="font-size: 2rem; margin-right: 15px;">${item.emoji}</div>
-                <div class="item-details">
-                    <h4>${item.name}</h4>
-                    <span>${item.quantity} × ${formatPrice(item.price)}</span>
-                </div>
-                <button class="remove-btn" onclick="removeFromCart(${item.id})">&times;</button>
+  cartItemsContainer.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    total += item.price;
+    const itemEl = document.createElement("div");
+    itemEl.className = "cart-item";
+    itemEl.innerHTML = `
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>$${item.price}</p>
             </div>
-        `).join('');
-    }
+            <div class="remove-item" onclick="removeFromCart(${index})">&times;</div>
+        `;
+    cartItemsContainer.appendChild(itemEl);
+  });
+
+  cartTotalEl.textContent = `$${total}`;
+  cartCountEl.textContent = cart.length;
 }
 
-// Показ уведомления
-function showToast(message) {
-    toastMsg.textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 2500);
+// Sidebar Logic
+function openCart() {
+  cartSidebar.classList.add("active");
+  overlay.classList.add("active");
 }
 
-// Обработчики событий
-function setupEventListeners() {
-    openCartBtn.addEventListener('click', () => {
-        cartModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-    
-    closeCartBtn.addEventListener('click', closeModal);
-    
-    cartModal.addEventListener('click', (e) => {
-        if (e.target === cartModal) {
-            closeModal();
-        }
-    });
-    
-    checkoutBtn.addEventListener('click', () => {
-        if (cart.length === 0) {
-            showToast('Корзина пуста!');
-            return;
-        }
-        alert('Спасибо за заказ! Менеджер свяжется с вами.');
-        cart = [];
-        updateCart();
-        closeModal();
-    });
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && cartModal.classList.contains('active')) {
-            closeModal();
-        }
-    });
-}
+cartBtn.addEventListener("click", openCart);
+closeCart.addEventListener("click", () => {
+  cartSidebar.classList.remove("active");
+  overlay.classList.remove("active");
+});
 
-function closeModal() {
-    cartModal.classList.remove('active');
-    document.body.style.overflow = '';
-}
-
-// Запуск
-init();
+document.querySelector(".checkout-btn").addEventListener("click", () => {
+  alert("Спасибо за заказ! (Это демо)");
+  cart = [];
+  updateCart();
+  cartSidebar.classList.remove("active");
+  overlay.classList.remove("active");
+});
