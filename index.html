@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Простой Магазин</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>MyShop</h1>
+            <div class="cart-info">
+                Корзина: <span id="cart-count">0</span> шт. | 
+                Сумма: <span id="cart-total">0</span> ₽
+                <button id="cart-btn">Оформить</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Наши товары</h2>
+        <div id="products-grid" class="products-grid">
+            <!-- Товары будут добавлены через JS -->
+        </div>
+    </main>
+
+    <!-- Модальное окно корзины -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Корзина</h2>
+            <div class="cart-items">
+                <!-- Элементы корзины -->
+            </div>
+            <p><strong>Итого: <span id="cart-modal-total">0</span> ₽</strong></p>
+            <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
